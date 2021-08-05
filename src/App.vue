@@ -1,11 +1,14 @@
 <template>
   <div id="app">
       <nav>
-        <button @click="menu = 1">Criar Pessoa</button>
+        <button @click="menu = 1">Criar Pessoa</button> |
         <button @click="menu = 2">Listar pessoas</button>
       </nav>
-      <cadastropessoa v-if="menu == 1"></cadastropessoa>
-      <listarpessoas v-if="menu == 2"></listarpessoas>
+      <cadastropessoa ref="cadastropessoa" v-show="menu == 1"></cadastropessoa>
+      <listarpessoas ref="listaPessoas" v-show="menu == 2"></listarpessoas>
+      <span v-show="showError">
+        {{msg_erro}}
+      </span>
   </div>
 </template>
 
@@ -22,8 +25,25 @@ export default {
   },
   data: () => {
     return {
-        menu: 1
+        menu: 1,
+        pessoaParam: {},
+        showError: false,
+        msg_erro: ''
     }
+  },
+  mounted() {
+    this.$root.$on('editar', (pessoa) => {
+        this.menu = 1;
+        let p = pessoa;
+        console.log(p)
+    });
+    this.$root.$on('error', (mensagem_erro) => {
+        this.showError = true;
+        this.msg_erro = mensagem_erro
+    });
+    this.$root.$on('add_pessoa', () => {
+      this.$refs.listaPessoas.recuperaPessoas(0,10);
+    })
   }
 }
 </script>
@@ -34,7 +54,12 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: white;
   margin-top: 60px;
+}
+body{
+  background-image: url("https://i.ytimg.com/vi/XBPjVzSoepo/maxresdefault.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 </style>

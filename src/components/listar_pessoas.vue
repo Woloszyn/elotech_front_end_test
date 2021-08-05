@@ -24,13 +24,13 @@ export default {
     },
     methods: {
         recuperaPessoas() {
-            this.axios.get("http://localhost:8078/getPessoas").then((result) => {
+            this.axios.get("http://apielotech.woloszyn.tech/getPessoas").then((result) => {
                 console.log(result);
                 this.pessoas = result.data;
             })
         },
         remover(pessoa_id) {
-            this.axios.delete("http://localhost:8078/deletePessoa/"+pessoa_id).then(() => {
+            this.axios.delete("http://apielotech.woloszyn.tech/deletePessoa/"+pessoa_id).then(() => {
                 this.recuperaPessoas();
             })
         }

@@ -66,7 +66,7 @@ export default {
                 dados.append('cpf', this.cpf);
                 dados.append('dataNascimento', this.dataNascimento);
                 dados.append('contatos', btoa(JSON.stringify(this.contatos)));
-                this.axios.post('http://localhost:8078/createPessoa', dados).then((response) => {
+                this.axios.post('http://apielotech.woloszyn.tech/createPessoa', dados).then((response) => {
                     console.log(response)
                 }).catch((error) => {
                     console.log(error)
@@ -82,7 +82,7 @@ export default {
             dados.append('cpf', this.cpf);
             dados.append('dataNascimento', this.dataNascimento);
             dados.append('contatos', btoa(JSON.stringify(this.contatos)));
-            this.axios.put('http://localhost:8078/updatePessoa', dados).then((response) => {
+            this.axios.put('http://apielotech.woloszyn.tech/updatePessoa', dados).then((response) => {
                 console.log(response)
             }).catch((error) => {
                 console.log(error)
